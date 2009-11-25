@@ -1,0 +1,4 @@
+LIBDIR=/home/martin/video
+BACKEND="$1"
+shift
+$LIBDIR/$BACKEND "$@"

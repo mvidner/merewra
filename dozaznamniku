@@ -1,0 +1,7 @@
+#!/bin/sh -x
+NEW="$2"
+if [ -z "$NEW" ]; then
+   NEW="${1%%.*}.wma"
+fi
+~/video/video ffmpeg zaznamnik "$1" "$NEW"
+touch -r "$1" "$NEW"

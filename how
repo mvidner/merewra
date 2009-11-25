@@ -1,0 +1,7 @@
+profily, kere lze implementovat ruznymi programy (ffmpeg, mencoder, transcode, vlc, ???)
+vlastne jen seznam nastaveni koderu
+- kontejner,
+- kodek audia a videa,
+- pripadne pozadovana velikost (pro mobil)
+- a max kvalita (spocitat bitrate)
+v prvni verzi jako shellove promenne

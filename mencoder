@@ -1,0 +1,58 @@
+#!/bin/bash -x
+PROFILE=$1
+IFILE=$2
+OFILE=$3
+LIBDIR=/home/martin/video
+. $LIBDIR/$PROFILE
+
+die() {
+    echo >&2 "$@"
+    exit 1
+}
+
+case $VCODEC-$ACODEC in
+    s263-samr)
+#	OPTS="$OPTS -of lavf -lavfopts format=mov"
+	OPTS="$OPTS -oac lavc -ovc lavc -af resample=8000,channels=1 -srate 8000 -lavcopts
+vcodec=h263:acodec=libamr_nb:abitrate=8 "
+	;;
+    *)
+	# special cases out of the way, now handle a-v separately
+	case $VCODEC in
+	    divx)
+		OPTS="$OPTS -ovc lavc"
+		LAVCOPTS="$LAVCOPTS:vcodec=mpeg4"
+		;;
+	    theora)
+		OPTS="$OPTS -ovc lavc"
+		LAVCOPTS="$LAVCOPTS:vcodec=libtheora" # :-( Cannot find codec 'libtheora' in libavcodec...
+		;;
+	    *)
+		die Cannot handle VCODEC=$VCODEC
+		;;
+	esac
+	case $ACODEC in
+	    mp3)
+		OPTS="$OPTS -af resample=16000" # for a720 input
+		OPTS="$OPTS -oac mp3lame"  # -lameopts preset=standard"
+		;;
+	    vorbis)
+#		OPTS="$OPTS -af resample=16000" # for a720 input
+		OPTS="$OPTS -oac lavc"
+		LAVCOPTS="$LAVCOPTS:acodec=vorbis"
+		;;
+	    *)
+		die Cannot handle ACODEC=$ACODEC
+		;;
+	esac
+	;;
+esac
+if [ -n "$WIDTH" ]; then
+    OPTS="$OPTS -vf scale=$WIDTH:$HEIGHT"
+fi
+if [ -n "$LAVCOPTS" ]; then
+    # remove superfluous leading ":"
+    OPTS="$OPTS -lavcopts ${LAVCOPTS:1}"
+fi
+mencoder -v "$IFILE" -o "$OFILE" $OPTS
+# ffmpeg -i mvi_0390.avi -s qcif -an mvi_0390.3gp # -acodec amr_nb
