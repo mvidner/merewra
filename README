@@ -1,0 +1,20 @@
+Merewra: Media Recoding Wrapper
+
+I am scratching my itch of converting between the media formats that my
+various consumer devices produce and consume, and comparing which of the
+available tools produces good (or any at all) results.
+
+There are *profiles* which are implemented by various *backends*
+The profiles are just lists of recoder settings:
+- container
+- audio and video codec
+- requested size (for a mobile phone)
+- quality
+The current backends are:
+- ffmepg
+- mencoder
+- transcode
+
+The current implementation is in bash.
+
+TODO: specify the license.
