@@ -1,4 +1,4 @@
 : ${NEW:=$2}
 : ${NEW:=${1%%.*}.ogv}
-~/video/video ffmpeg ogg $1 $NEW
+merewra ffmpeg ogg $1 $NEW
 touch -r $1 $NEW

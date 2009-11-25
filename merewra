@@ -1,0 +1,6 @@
+#!/bin/sh -x
+: I am $0
+export LIBDIR=/home/martin/merewra
+BACKEND="$1"
+shift
+$LIBDIR/backends/$BACKEND "$@"

@@ -2,8 +2,8 @@
 PROFILE="$1"
 IFILE="$2"
 OFILE="$3"
-LIBDIR=/home/martin/video
-. "$LIBDIR/$PROFILE"
+# LIBDIR comes from the environment
+. "$LIBDIR/profiles/$PROFILE"
 
 die() {
     echo >&2 "$@"
