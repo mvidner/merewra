@@ -1,4 +1,0 @@
-# theora and vorbis
-VCODEC=theora
-ACODEC=vorbis
-CONTAINER=ogg

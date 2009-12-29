@@ -15,6 +15,4 @@ The current backends are:
 - mencoder
 - transcode
 
-The current implementation is in bash.
-
 TODO: specify the license.

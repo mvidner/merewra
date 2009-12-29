@@ -1,4 +1,0 @@
-# just divx and mp3, no other specs
-VCODEC=divx
-ACODEC=mp3
-CONTAINER=avi
